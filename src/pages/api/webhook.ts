@@ -26,9 +26,9 @@ export default async function handler(req: any, res: any) {
 
       let webhook_data = req.body;
 
-      console.info(webhook_data, "e1");
-      console.info(webhook_data[0].events.nft);
-      console.info(webhook_data[0].events.nft.nfts[0]);
+      console.error(webhook_data, "e1");
+      console.error(webhook_data[0].events.nft);
+      console.error(webhook_data[0].events.nft.nfts[0]);
       let token: any = await getAsset(webhook_data[0].events.nft.nfts[0].mint);
 
       const response = await fetch(webhook, {
@@ -102,7 +102,7 @@ export default async function handler(req: any, res: any) {
           ],
         }),
       });
-      console.info(response);
+      console.error(response);
       res.status(200).json("success");
     }
   } catch (err) {
