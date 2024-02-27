@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 const rpc = `https://rpc.helius.xyz/?api-key=${process.env.HELIUS_KEY}`;
 
 const getAsset = async (token: string) => {
@@ -105,8 +103,7 @@ export default async function handler(req: any, res: any) {
         }),
       });
       console.log(response);
-      // res.status(200).json("success");
-      return NextResponse.json({ body: { status: 'ok',  'success' } }, { status: 200 })
+      res.status(200).json("success");
     }
   } catch (err) {
     console.log(err);
