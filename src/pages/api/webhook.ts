@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 const rpc = `https://rpc.helius.xyz/?api-key=${process.env.HELIUS_KEY}`;
 
 const getAsset = async (token: string) => {
@@ -26,9 +28,9 @@ export default async function handler(req: any, res: any) {
 
       let webhook_data = req.body;
 
-      console.error(webhook_data, "e1");
-      console.error(webhook_data[0].events.nft);
-      console.error(webhook_data[0].events.nft.nfts[0]);
+      console.log(webhook_data, "e1");
+      console.log(webhook_data[0].events.nft);
+      console.log(webhook_data[0].events.nft.nfts[0]);
       let token: any = await getAsset(webhook_data[0].events.nft.nfts[0].mint);
 
       const response = await fetch(webhook, {
@@ -102,8 +104,9 @@ export default async function handler(req: any, res: any) {
           ],
         }),
       });
-      console.error(response);
-      res.status(200).json("success");
+      console.log(response);
+      // res.status(200).json("success");
+      return NextResponse.json({ body: { status: 'ok',  'success' } }, { status: 200 })
     }
   } catch (err) {
     console.log(err);
